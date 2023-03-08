@@ -1,0 +1,48 @@
+<form [formGroup]="technologyForm">
+  <ng-container *ngIf="pageType == 'add' || pageType == 'base'">
+    <div formGroupName="base">
+      <h2>Basis</h2>
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label for="name">Name: </mat-label>
+        <input matInput id="name" type="text" formControlName="name" value="{{technology?.name}}">
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label for="category">Kategorie: </mat-label>
+        <mat-select id="category" formControlName="category">
+          <mat-option value="">Kategorie auswählen...</mat-option>
+          <mat-option *ngFor="let category of categories | keyvalue" [value]="category.value">
+            {{ category.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label for="description">Technologie-Beschreibung: </mat-label>
+        <input matInput id="description" type="text" formControlName="description" value="{{technology?.description}}">
+      </mat-form-field>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="pageType == 'add' || pageType == 'ring' || pageType == 'publish'">
+    <div formGroupName="ring">
+      <h2>Ring</h2>
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label for="ring">Einordnung / Ring: </mat-label>
+        <mat-select id="ring" formControlName="ring">
+          <mat-option value="">Ring auswählen...</mat-option>
+          <mat-option *ngFor="let ring of rings | keyvalue" [value]="ring.value">
+            {{ ring.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label for="classification">Beschreibung der Einordnung: </mat-label>
+        <input matInput id="classification" type="text" formControlName="classification" value="{{technology?.classification}}">
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <button mat-raised-button class="form-button" color="primary" *ngIf="pageType == 'add'" type="button" [disabled]="!technologyForm.valid" (click)="addTechnology()">Hinzufügen</button>
+  <button mat-raised-button class="form-button" color="primary" *ngIf="pageType == 'base'" type="button" [disabled]="!technologyForm.valid" (click)="updateBase()">Anpassen</button>
+  <button mat-raised-button class="form-button" color="primary" *ngIf="pageType == 'ring'" type="button" [disabled]="!technologyForm.valid" (click)="updateRing()">Anpassen</button>
+  <button mat-raised-button class="form-button" color="primary" *ngIf="pageType == 'publish'" type="button" [disabled]="!technologyForm.valid" (click)="publish()">Publizieren</button>
+  <button mat-raised-button class="form-button" color="accent" type="button" (click)="goBack()">zurück</button>
+</form>

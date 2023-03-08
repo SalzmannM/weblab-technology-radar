@@ -1,0 +1,19 @@
+<h2>Technologien</h2>
+
+<div class="content" *ngFor="let category of categories | keyvalue">
+    <h2>{{category.value}}</h2>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let ring of rings | keyvalue">
+            <mat-card class="mat-elevation-z4">
+                <mat-card-title>{{ring.value}}</mat-card-title>
+                <mat-list class="technologies">
+                    <ng-container *ngFor="let technology of technologies">
+                        <mat-list-item *ngIf="technology.published && technology.category == category.value && technology.ring == ring.value">
+                            <span matListItemTitle>{{technology.name}}</span>
+                        </mat-list-item>
+                    </ng-container>
+                </mat-list>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<h2>Technologien</h2>
+<div>
+    <a mat-stroked-button routerLink="/editor/add">Technologie hinzufügen</a>
+</div>
+
+<mat-list class="technologies">
+    <mat-list-item class="technology-item" *ngFor="let technology of technologies">
+        <span>{{technology.name}}</span>
+        <span class="technology-buttons">
+            <a mat-stroked-button routerLink="/editor/base/{{technology._id}}">
+                Technologie ändern
+            </a>
+            <a mat-stroked-button routerLink="/editor/ring/{{technology._id}}">
+                Einordnung ändern
+            </a>
+            <a mat-stroked-button *ngIf="!technology.published" routerLink="/editor/publish/{{technology._id}}">
+                Publizieren
+            </a>
+        </span>
+    </mat-list-item>
+</mat-list>
